@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import View
 from django.http import JsonResponse
+from django.db.models import Q
+
 from searchdata.models import FIFARanking
 
 # Create your views here.
@@ -23,7 +25,9 @@ class SearchView(View):
         for key in keys:
             # 每个关键字的搜索结果放入列表中
             res[key] = []
-            items = FIFARanking.objects.filter(country_full__exact=key)
+            items = FIFARanking.objects.filter(
+                Q(country_full__exact=key) | Q(country_abrv__exact=key)
+            )
             for item in items:
                 # 每一条搜索结果
                 dict = {
