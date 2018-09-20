@@ -23,7 +23,7 @@ class SearchView(View):
         res = {}
 
         for key in keys:
-            # 每个关键字的搜索结果放入列表中
+            # 每个关键字的搜索结果放入列表中，没有结果返回空列表
             res[key] = []
             items = FIFARanking.objects.filter(
                 Q(country_full__exact=key) | Q(country_abrv__exact=key)
