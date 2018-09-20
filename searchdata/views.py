@@ -45,6 +45,4 @@ class SearchView(View):
                     "rank_date": item.rank_date
                 }
                 res[key].append(dict)
-        if len(res[key]) == 0:
-            return JsonResponse({"status": "not found"})
         return JsonResponse(res)
